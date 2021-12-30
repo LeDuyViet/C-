@@ -1,0 +1,116 @@
+﻿<Window x:Class="DeThi2.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DeThi2"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="1000">
+    <Window.Resources >
+        <!--Button radius-->
+        <Style
+            TargetType="Button">
+            <Setter
+                Property="Template">
+                <Setter.Value>
+                    <ControlTemplate
+                        TargetType="Button">
+                        <Border
+                            CornerRadius="50"
+                            Background="{TemplateBinding Background}">
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" Value="Aqua" />
+        </Style>
+        <!--Button radius (end)-->
+        
+        <!--Text box-->
+        <Style 
+            TargetType="TextBox">
+            <!--Font Size 15, Chu Mau Do-->
+            <Setter
+                Property="FontSize"
+                Value="15" />
+            <Setter
+                Property="Foreground"
+                Value="Red" />
+
+            <!-- Sử dụng Trigger để hứng sự kiện MouseOver-->
+            <Style.Triggers>
+                <Trigger
+                    Property="IsMouseOver"
+                    Value="True">
+                    <Setter
+                        Property="Background"
+                        Value="Beige" />
+                    <Setter Property="Foreground" Value="red"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <!--Text box (end)-->
+        <Style
+            TargetType="DataGridColumnHeader">
+            <Setter
+                Property="FontWeight"
+                Value="Bold" />
+            <Setter
+                Property="HorizontalContentAlignment"
+                Value="Center" />
+        </Style>
+        
+    </Window.Resources>
+    <Grid Loaded="LoadWindow">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition />
+            <RowDefinition Height="auto"/>
+            
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontSize="50">SALE MANAGEMENT</Label>
+
+        <Label Grid.Row="1" Grid.Column="0" Margin="100, 10 , 10, 10">ProductID:</Label>
+        <TextBox x:Name="txtProductID" Grid.Row="1" Grid.Column="1" Margin="10, 10 , 100, 10" Width="400"></TextBox>
+        <Label Grid.Row="2" Grid.Column="0" Margin="100, 10 , 10, 10">Product Name:</Label>
+        <TextBox x:Name="txtProductName" Grid.Row="2" Grid.Column="1" Margin="10, 10 , 100, 10" Width="400"></TextBox>
+        <Label Grid.Row="3" Grid.Column="0" Margin="100, 10 , 10, 10">Unit Price:</Label>
+        <TextBox x:Name="txtUnitPrice" Grid.Row="3" Grid.Column="1" Margin="10, 10 , 100, 10" Width="400"></TextBox>
+        <Label Grid.Row="4" Grid.Column="0" Margin="100, 10 , 10, 10">Quantity:</Label>
+        <TextBox x:Name="txtQuantity" Grid.Row="4" Grid.Column="1" Margin="10, 10 , 100, 10" Width="400"></TextBox>
+        <Label Grid.Row="5" Grid.Column="0" Margin="100, 10 , 10, 10">Category:</Label>
+        <ComboBox x:Name="ComCategory" Grid.Row="5" Grid.Column="1" Margin="10, 10 , 100, 10" Width="400"></ComboBox>
+
+        <Grid Grid.Row="6" Grid.ColumnSpan="2" Margin="20 0 20 0" >
+            <DataGrid x:Name="gridData" AutoGenerateColumns="False" SelectionChanged="SelectItem">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ProductID" Width="*" Binding="{Binding ProductId, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Product Name" Width="*" Binding="{Binding ProductName, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Category" Width="*" Binding="{Binding CategoryId, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Unit Price" Width="*" Binding="{Binding UnitPrice, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Quantity" Width="*" Binding="{Binding Quantity, Mode=OneWay}"/>
+                    <DataGridTextColumn Header="Amount" Width="*" Foreground="DarkBlue" FontStyle="Italic" Binding="{Binding Amount, Mode=OneWay}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <WrapPanel Grid.Row="7" Grid.ColumnSpan="2" HorizontalAlignment="Center">
+            <Button Width="80" Margin="10" Click="btnAdd">Insert</Button>
+            <Button Width="80" Margin="10" Click="btnUpdate">Update</Button>
+            <Button Width="80" Margin="10" Click="btnDelete">Delete</Button>
+            <Button Width="80" Margin="10" Click="btnSearch">Search</Button>
+        </WrapPanel>
+    </Grid>
+</Window>
